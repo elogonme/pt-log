@@ -2,9 +2,9 @@
   <q-page padding>
     <div  class="flex justify-center">
       <img
-      class="responsive"
-      alt="HammerFitness logo"
-      src="~assets/hammerfitness.png"
+        class="responsive"
+        alt="HammerFitness logo"
+        src="~assets/hammerfitness.png"
     >
     </div>
 
@@ -40,6 +40,24 @@
           separator="cell"
           :pagination="initialPagination"
         >
+          <template v-slot:header-cell-date="props">
+            <q-th :props="props">
+              <q-icon name="mdi-calendar" size="1.5em" />
+              {{ props.col.label }}
+            </q-th>
+          </template>
+          <template v-slot:header-cell-session="props">
+            <q-th :props="props">
+              <q-icon name="mdi-pound" size="1.5em" />
+              {{ props.col.label }}
+            </q-th>
+          </template>
+          <template v-slot:header-cell-signature="props">
+            <q-th :props="props">
+              <q-icon name="mdi-draw" size="1.5em" />
+              {{ props.col.label }}
+            </q-th>
+          </template>
           <template v-slot:body="props">
             <q-tr :props="props">
               <q-td key="date" :props="props">
@@ -52,62 +70,70 @@
               <q-td key="date" :props="props">
                 {{ props.row.signature }}
                 <q-popup-edit v-model="props.row.signature">
-                  <q-input v-model="props.row.signature" dense autofocus counter />
+                  <!-- <q-input v-model="props.row.signature" dense autofocus counter >
+                    <template v-slot:before>
+                      <q-icon name="mdi-draw" />
+                    </template>
+                  </q-input> -->
+                  <signature-pad />
                 </q-popup-edit>
               </q-td>
             </q-tr>
           </template>
         </q-table>
       </div>
+
     </q-page>
 </template>
 
 <script>
+import SignaturePad from 'src/components/SignaturePad.vue'
 import { defineComponent, ref } from 'vue'
 const titleColumns = [
-  { name: 'name', label: 'Total Sessions Purchased', align: 'left' },
-  { name: 'session', label: 'Coach', align: 'left' },
-  { name: 'signature', label: 'Irada', align: 'left' }
+	{ name: 'name', label: 'Total Sessions Purchased', align: 'left' },
+	{ name: 'session', label: 'Coach', align: 'left' },
+	{ name: 'signature', label: 'Irada', align: 'left' }
 ]
 const titleRows = [
-  { name: 'Total Sessions Purchased', session: 'Coach', signature: 'Irada' }
+	{ name: 'Total Sessions Purchased', session: 'Coach', signature: 'Irada' }
 ]
 const columns = [
-  { name: 'date', required: true, label: 'Date', align: 'left', field: 'date', sortable: true },
-  { name: 'session', align: 'center', label: 'Session', field: 'session', sortable: true },
-  { name: 'signature', label: 'Client Signature', field: 'signature', align: 'center' }
+	{ name: 'date', required: true, label: 'Date', align: 'left', field: 'date', sortable: true },
+	{ name: 'session', align: 'center', label: 'Session', field: 'session', sortable: true },
+	{ name: 'signature', label: 'Client Signature', field: 'signature', align: 'center' }
 ]
 
 const date = ref('2019/02/01')
 
 const rows = [
-  { date: date.value, session: '1', signature: '' },
-  { date: '2021/06/25', session: '2', signature: '' },
-  { date: '2021/06/28', session: '3', signature: '' },
-  { date: '2021/06/30', session: '4', signature: '' },
-  { date: '2021/07/02', session: '5', signature: '' },
-  { date: '2021/07/05', session: '6', signature: '' }
+	{ date: date.value, session: '1', signature: '' },
+	{ date: '2021/06/25', session: '2', signature: '' },
+	{ date: '2021/06/28', session: '3', signature: '' },
+	{ date: '2021/06/30', session: '4', signature: '' },
+	{ date: '2021/07/02', session: '5', signature: '' },
+	{ date: '2021/07/05', session: '6', signature: '' }
 ]
 
 export default defineComponent({
-  name: 'PageIndex',
-  setup () {
-    return {
-      model: ref(null),
-      columns,
-      rows,
-      titleColumns,
-      titleRows,
-      clients: ['Andre', 'Lily', 'Samantha', 'Jack'],
-      initialPagination: {
-        sortBy: 'desc',
-        descending: false,
-        page: 1,
-        rowsPerPage: 25
-        // rowsNumber: xx if getting data from a server
-      }
-    }
-  }
+	components: { SignaturePad },
+	name: 'PageIndex',
+	setup () {
+		return {
+			model: ref(null),
+			columns,
+			rows,
+			titleColumns,
+			titleRows,
+			clients: ['Andre', 'Lily', 'Samantha', 'Jack'],
+			initialPagination: {
+				sortBy: 'desc',
+				descending: false,
+				page: 1,
+				rowsPerPage: 25
+				// rowsNumber: xx if getting data from a server
+			}
+		}
+	}
 })
 </script>
 <style lang="sass">
