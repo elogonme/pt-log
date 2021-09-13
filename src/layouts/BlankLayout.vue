@@ -4,13 +4,7 @@
     <!-- (Optional) The Header -->
     <q-header>
       <q-toolbar>
-        <q-btn
-          flat
-          round
-          dense
-          icon="mdi-menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-icon name="img:img/logo-white.png" />
 
         <q-toolbar-title>
           Client Management System
@@ -22,18 +16,6 @@
     <!-- (Optional) The Footer -->
 
     <!-- (Optional) A Drawer; you can add one more with side="right" or change this one's side -->
-    <q-drawer
-      v-model="leftDrawerOpen"
-      side="left"
-      bordered
-      class="bg-grey-2"
-    >
-      <!-- QScrollArea is optional -->
-      <q-scroll-area class="fit q-pa-sm">
-        <!-- Content here -->
-      </q-scroll-area>
-    </q-drawer>
-
     <q-page-container>
       <!-- This is where pages get injected -->
       <router-view />

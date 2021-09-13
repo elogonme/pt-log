@@ -5,7 +5,7 @@
         class="responsive"
         alt="HammerFitness logo"
         src="~assets/hammerfitness.png"
-    >
+    />
     </div>
 
     <div class="text-h5 text-center q-mt-lg q-pa-xs bg-blue-2">Client Sign off Sheet</div>

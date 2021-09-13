@@ -51,7 +51,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow async-await
-    indent: [2, 'tab'],
+    indent: 'off',
     'no-tabs': 0,
     'generator-star-spacing': 'off',
     // allow paren-less arrow functions
@@ -59,7 +59,7 @@ module.exports = {
     'one-var': 'off',
     'no-void': 'off',
     'multiline-ternary': 'off',
-
+    'space-before-function-paren': ['error', 'ignore'],
     'import/first': 'off',
     'import/named': 'error',
     'import/namespace': 'error',
